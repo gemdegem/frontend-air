@@ -1,0 +1,300 @@
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./src/app/modules/components/module-tile/modal.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+.popup {
+    width: 30%;
+    display: grid;
+    grid-template-columns: 45% 45%;
+    -moz-column-gap: 10%;
+         column-gap: 10%;
+    row-gap: 1vw;
+    grid-template-areas:
+        "address name"
+        "description description"
+        "schemas schemas";
+}
+
+.address {
+    grid-area: address;
+    font-weight: 600;
+    align-self: center;
+}
+
+.name {
+    grid-area: name;
+    display: flex;
+    justify-content: center;
+    padding: 0.5vw;
+}
+
+.description {
+    grid-area: description;
+    padding: 1vw;
+}
+
+.schemas {
+    grid-area: schemas;
+}
+
+.schemasSubtitle {
+    padding: 0.5vw 0;
+}
+
+.schemasList {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    padding: 0;
+}
+
+.schemaNameElement {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+}
+
+.schemaName {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+}
+
+.inputsList {
+    padding: 0.5vw 0 1vw;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+    list-style: none;
+}
+
+.inputWrapper {
+    display: flex;
+    gap: 0.5vw;
+}
+
+.inputDescription {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.htmlInputElementWrapper {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.htmlInputElement {
+    width: 100%;
+    text-align: center;
+    border: none;
+    outline: none;
+}
+
+.numericalInput {
+    padding-left: 1vw;
+}
+
+.output {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.runButton {
+    padding: 1.5vw;
+    cursor: pointer;
+}
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/app/modules/components/module-tile/module-tile.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+.module-tile_tileWrapper__ZvsG6 {
+    width: 24%;
+    position: relative;
+    transition: all 0.8s ease-in-out;
+
+}
+
+.module-tile_moduleTile__Hr6yC {
+    list-style: none;
+    height: -moz-fit-content;
+    height: fit-content;
+    /* aspect-ratio: 16/9; */
+    display: grid;
+    grid-template-columns: 55% 40%;
+    -moz-column-gap: 5%;
+         column-gap: 5%;
+    /* grid-template-rows: 2vw 2vw 4vw 1.25vw; */
+    row-gap: 0.5vw;
+    grid-template-areas:
+        "name imageWrapper"
+        "address imageWrapper"
+        "description description"
+        "attributes attributes";
+    padding: 1vw;
+    height: 340px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.module-tile_name__4rQaq {
+    grid-area: name;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.module-tile_imageWrapper__nyflA {
+    grid-area: imageWrapper;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.module-tile_image__Wj8gR {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+}
+
+.module-tile_address__cyG6p {
+    grid-area: address;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.module-tile_description__GPp3V {
+    grid-area: description;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5vw;
+    line-height: normal;
+}
+
+.module-tile_attributes__Rgt_w {
+    grid-area: attributes;
+    display: flex;
+    gap: 0.5vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-gutter: stable;
+}
+
+.module-tile_attributes__Rgt_w::-webkit-scrollbar {
+    height: 0.2vw;
+}
+
+/* Track */
+.module-tile_attributes__Rgt_w::-webkit-scrollbar-track {
+    background: rgb(253, 224, 71);
+}
+
+/* Handle */
+.module-tile_attributes__Rgt_w::-webkit-scrollbar-thumb {
+    background: black;
+}
+
+/* Handle on hover */
+.module-tile_attributes__Rgt_w::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.module-tile_attribute__eGq_c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.25vw;
+}
+
+.module-tile_moduleBox__e1h01 {
+    background-color: white;
+    border-radius: 2%;
+    width: 24%;
+    padding: 10px;
+    position: relative;
+    border-radius: 7px;
+    transition: all 0.8s ease-in-out;
+}
+
+.module-tile_tileWrapper__ZvsG6::before,
+.module-tile_tileWrapper__ZvsG6::after {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    border-style: solid;
+    width: 2em;
+    height: 2em;
+    transition: all 0.8s ease-in-out;
+    border-color: #6e6e6e;
+    z-index: 0;
+}
+
+.module-tile_tileWrapper__ZvsG6::after {
+    top: -6px;
+    left: -6px;
+    border-width: 2px 0 0 2px;
+}
+
+.module-tile_tileWrapper__ZvsG6::before {
+    bottom: -6px;
+    right: -6px;
+    border-width: 0 2px 2px 0;
+}
+
+.module-tile_moduleBox__e1h01:hover::before,
+.module-tile_moduleBox__e1h01:hover::after {
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    border-radius: 7px;
+}
+
+/* .moduleBox:hover {
+    background-image: linear-gradient(to bottom right, #66ffcc 0%, #ffccff 100%) !important;
+} */
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/app/modules/components/search-bar.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
+.search-bar_searchInput__YXvsm {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: 4rem;
+    line-height: 3rem;
+}
+.search-bar_searchInput__YXvsm::-moz-placeholder {
+    color: rgb(117, 117, 117);
+}
+.search-bar_searchInput__YXvsm::placeholder {
+    color: rgb(117, 117, 117);
+}
+
+.search-bar_inputWrapper__LDBBt {
+    width: 100%;
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[7].use[3]!./src/app/modules/modules.module.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+.modules_content__QuKJB {
+  display: flex;
+  gap: 1vw;
+  padding: 1vw;
+}
+
+.modules_modulesList__EC_H1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 1vw;
+  padding: 0;
+}
+
