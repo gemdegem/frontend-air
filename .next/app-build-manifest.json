@@ -28,23 +28,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/modules/@details/page.js"
     ],
-    "/telemetry/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/telemetry/page.js"
-    ],
-    "/docs/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/docs/layout.css",
-      "static/chunks/app/docs/layout.js"
-    ],
-    "/docs/introduction/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/docs/introduction/page.css",
-      "static/chunks/app/docs/introduction/page.js"
-    ],
     "/not-found": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

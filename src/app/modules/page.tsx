@@ -22,38 +22,43 @@ type ModuleTileProps = {
 
 export default function () {
   const [searchString, setSearchString] = useState("");
+  const [originalModuleList, setOriginalModuleList] = useState<any[]>(modulesList);
+  const [filteredModuleList, setFilteredModuleList] = useState<any[]>(modulesList);
 
-  const [updatedModuleList, setUpdatedModuleList] = useState<any[]>(modulesList);
   const handleModulesFetched = (modules: string[]) => {
-    setUpdatedModuleList(modules.map((moduleName: string) => ({ name: moduleName })));
+    const formattedModules = modules.map((moduleName: string) => ({ name: moduleName }));
+    setOriginalModuleList(formattedModules);
+    setFilteredModuleList(formattedModules);
   };
 
   useEffect(() => {
     if (searchString) {
-      const newData = modulesList.filter((item) => {
+      const newData = originalModuleList.filter((item) => {
         return item.name?.toLowerCase().includes(searchString.toLowerCase());
       });
-
-      setUpdatedModuleList(newData);
+      setFilteredModuleList(newData);
+    } else {
+      setFilteredModuleList(originalModuleList);
     }
-  }, [searchString]);
+  }, [searchString, originalModuleList]);
 
   useEffect(() => {
     async function fetchModules() {
       const modules = await ModulesService.getModulesList();
-      setUpdatedModuleList(modules);
+      setOriginalModuleList(modules);
+      setFilteredModuleList(modules);
     }
 
     fetchModules();
   }, []);
 
   return (
-    <main className={classNames(classes.content, "flex flex-col items-center justify-center  my-auto ")}>
+    <main className={classNames(classes.content, "flex flex-col items-center justify-center my-auto ")}>
       <PolkadotWallet onModulesFetched={handleModulesFetched} />
       <SearchBar setSearchString={setSearchString} searchString={searchString} />
-      {updatedModuleList ? (
+      {filteredModuleList && filteredModuleList.length > 0 ? (
         <ul className={classes.modulesList}>
-          {updatedModuleList.map((module, i) => (
+          {filteredModuleList.map((module, i) => (
             <ModuleTile key={module.name} {...module} />
           ))}
         </ul>
