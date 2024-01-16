@@ -2,52 +2,64 @@
 
 import classNames from "classnames";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { enablePolkadotExtension } from "@/services/polkadotClient";
 
-import { modulesList } from "@/services/modules-service";
+import ModulesService, { modulesList } from "@/services/modules-service";
 import ModuleTile from "./components/module-tile/module-tile";
 
-import classes from './modules.module.css';
+import classes from "./modules.module.css";
 import SearchBar from "./components/search-bar";
+const PolkadotWallet = dynamic(() => import("@/components/PolkadotWallet"), { ssr: false });
 
 type ModuleTileProps = {
-    image_url?: string;
-    name: string;
-    address: string;
-    description?: string;
-    attributes?: string[];
+  image_url?: string;
+  name: string;
+  address: string;
+  description?: string;
+  attributes?: string[];
 };
 
 export default function () {
+  const [searchString, setSearchString] = useState("");
 
-    const [searchString, setSearchString] = useState('');
+  const [updatedModuleList, setUpdatedModuleList] = useState<any[]>(modulesList);
+  const handleModulesFetched = (modules: string[]) => {
+    setUpdatedModuleList(modules.map((moduleName: string) => ({ name: moduleName })));
+  };
 
-    const [updatedModuleList, setUpdatedModuleList] = useState<any[]>(modulesList);
+  useEffect(() => {
+    if (searchString) {
+      const newData = modulesList.filter((item) => {
+        return item.name?.toLowerCase().includes(searchString.toLowerCase());
+      });
 
-    useEffect(() => {
+      setUpdatedModuleList(newData);
+    }
+  }, [searchString]);
 
-        if (searchString) {
-            const newData = modulesList.filter((item) => {
-                return item.name?.toLowerCase().includes(searchString.toLowerCase())
-            });
+  useEffect(() => {
+    async function fetchModules() {
+      const modules = await ModulesService.getModulesList();
+      setUpdatedModuleList(modules);
+    }
 
-            setUpdatedModuleList(newData);
-        }
+    fetchModules();
+  }, []);
 
-    }, [searchString])
-
-    return (
-        <main className={classNames(classes.content, "flex flex-col items-center justify-center  my-auto ")}>
-            <SearchBar setSearchString={setSearchString} searchString={searchString} />
-            {
-                updatedModuleList ? <ul className={classes.modulesList}>
-                    {updatedModuleList.map((module, i) => (
-                        <ModuleTile
-                            key={module.name}
-                            {...module}
-                        />
-                    ))}
-                </ul> : <span>There is no data to display</span>}
-
-        </main>
-    );
+  return (
+    <main className={classNames(classes.content, "flex flex-col items-center justify-center  my-auto ")}>
+      <PolkadotWallet onModulesFetched={handleModulesFetched} />
+      <SearchBar setSearchString={setSearchString} searchString={searchString} />
+      {updatedModuleList ? (
+        <ul className={classes.modulesList}>
+          {updatedModuleList.map((module, i) => (
+            <ModuleTile key={module.name} {...module} />
+          ))}
+        </ul>
+      ) : (
+        <span>There is no data to display</span>
+      )}
+    </main>
+  );
 }
