@@ -1,7 +1,7 @@
-import BasicImage from '../../public/img/frontpage/blockchain-1.png'
-import BasicImage1 from '../../public/img/frontpage/blockchain-2.png'
-import Image1 from '../../public/img/frontpage/portfolio-b1.png'
-import Image2 from '../../public/img/frontpage/portfolio-b2.png'
+import BasicImage from "../../public/img/frontpage/blockchain-1.png";
+import BasicImage1 from "../../public/img/frontpage/blockchain-2.png";
+import Image1 from "../../public/img/frontpage/portfolio-b1.png";
+import Image2 from "../../public/img/frontpage/portfolio-b2.png";
 
 export const modulesList = [
   {
@@ -66,7 +66,7 @@ export const modulesList = [
     hash: "da6a2f603ab3365b779e98a67dc84ce0afd3d69f6b336e698f68a50cdd920c4e",
     signature: "8c154638f98b3037c720e56281bac5dd0f2141f5ad189588befc3030d6b4b431b164f97365145c2b3c6dde6706b1552115b7759cd06c0a2aecb14cfbf4c6a78a",
     ss58_address: "5H6P4f9VoFLSsuPnq6KtEbG9VTEP2oTddXEHaJ4BDz9GXUgi",
-    pub_key: '0x06739d386D215deda42Fc57b595c0e3FA3715687',
+    pub_key: "0x06739d386D215deda42Fc57b595c0e3FA3715687",
     schema: {
       put: {
         input: { v: "dict", encrypt: "bool", replicas: "int", k: "str" },
@@ -138,12 +138,15 @@ export const modulesList = [
 ];
 
 export default class ModulesService {
-  static getModulesList = async (searchQuery = "") => {
-    if (!searchQuery) {
-      return modulesList;
-    }
+  static getModulesList = async (page = 1, itemsPerPage = 8, searchQuery = "") => {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
 
-    return modulesList.filter((module) => module.name.includes(searchQuery) || (module.description && module.description.includes(searchQuery)));
+    let filteredModules = modulesList;
+    if (searchQuery) {
+      filteredModules = modulesList.filter((module) => module.name.includes(searchQuery) || (module.description && module.description.includes(searchQuery)));
+    }
+    return filteredModules.slice(startIndex, endIndex);
   };
 
   static getModuleDetailsByName = async (name: string) => {
