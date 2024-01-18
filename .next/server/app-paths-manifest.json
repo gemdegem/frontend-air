@@ -1,6 +1,7 @@
 {
   "/not-found": "app/not-found.js",
   "/page": "app/page.js",
+  "/exchanges/page": "app/exchanges/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
   "/modules/page": "app/modules/page.js"
 }

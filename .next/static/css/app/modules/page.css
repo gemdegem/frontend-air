@@ -298,30 +298,4 @@
   padding: 0;
 }
 
-.modules_react-paginate__zqxtI {
-  list-style: none;
-  height: 31.5px;
-  width: 31.5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2px;
-  cursor: pointer;
-}
-
-.modules_active__JuIZD {
-  background-color: #1e50ff;
-  border-radius: 50%;
-}
-
-.modules_page-item__Z8xXl {
-  list-style: none;
-  padding: 2px 12px;
-  height: 31.5px;
-  width: 31.5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2px;
-}
 
