@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { web3Enable, web3Accounts } from "@polkadot/extension-dapp";
 import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 import { postRequest } from "../services/ApiCalls";
-import { connect } from "http2";
 
 export default function PolkadotWallet({ onModulesFetched }: { onModulesFetched: (data: any) => void }) {
   const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
@@ -41,9 +40,9 @@ export default function PolkadotWallet({ onModulesFetched }: { onModulesFetched:
   };
 
   return (
-    <div className="bg-neutral-100 flex items-center justify-center h-[20svh]">
+    <div className=" flex items-center justify-center h-[20svh]">
       {accounts.length === 0 && (
-        <div className="p-8 rounded-md shadow-lg flex flex-col gap-4">
+        <div className="bg-neutral-100 p-8 rounded-md shadow-md flex flex-col gap-4">
           <p> Connect Wallet to Fetch Modules </p>
           <button onClick={handleConnectClick} className="rounded-md px-4 py-2 bg-neutral-800 text-white ">
             Connect
@@ -52,7 +51,7 @@ export default function PolkadotWallet({ onModulesFetched }: { onModulesFetched:
       )}
 
       {accounts.length > 0 && !selectedAccount ? (
-        <>
+        <div className="shadow-md p-8 bg-neutral-100">
           <select onChange={(e) => handleAccountSelection(parseInt(e.target.value, 10))} className="rounded-md">
             <option value="" key="empty" hidden disabled selected>
               Choose your account
@@ -63,10 +62,10 @@ export default function PolkadotWallet({ onModulesFetched }: { onModulesFetched:
               </option>
             ))}
           </select>
-        </>
+        </div>
       ) : null}
       {selectedAccount && (
-        <div className="p-8 rounded-md shadow-lg flex flex-col gap-4">
+        <div className="bg-neutral-100 p-8 rounded-md shadow-lg flex flex-col gap-4">
           <p>Account Name: {selectedAccount.meta.name}</p>
           <p>Account Address: {selectedAccount.address}</p>
           <button onClick={handlePostRequest} className="rounded-md px-4 py-2 bg-neutral-800 text-white ">
