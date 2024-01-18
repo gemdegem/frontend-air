@@ -2,23 +2,30 @@ import React, { useEffect, useState } from "react";
 import { web3Enable, web3Accounts } from "@polkadot/extension-dapp";
 import { InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
 import { postRequest } from "../services/ApiCalls";
+import { connect } from "http2";
 
 export default function PolkadotWallet({ onModulesFetched }: { onModulesFetched: (data: any) => void }) {
   const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
   const [selectedAccount, setSelectedAccount] = useState<InjectedAccountWithMeta | null>(null);
-  const [moduleNames, setModuleNames] = useState<string[]>([]);
 
-  useEffect(() => {
-    async function connectWallet() {
-      const extensions = await web3Enable("MyApp");
-      if (extensions.length > 0) {
-        const allAccounts = await web3Accounts();
-        setAccounts(allAccounts as InjectedAccountWithMeta[]);
+  async function connectWallet() {
+    try {
+      const extensions = await web3Enable("CommuneAI");
+      if (extensions.length === 0) {
+        console.error("Install Polkadot wallet extension");
+        return;
       }
-    }
 
+      const allAccounts = await web3Accounts();
+      setAccounts(allAccounts as InjectedAccountWithMeta[]);
+    } catch (error) {
+      console.error("Error connecting to wallet", error);
+    }
+  }
+
+  const handleConnectClick = () => {
     connectWallet();
-  }, []);
+  };
 
   const handleAccountSelection = (accountIndex: number) => {
     setSelectedAccount(accounts[accountIndex]);
@@ -34,24 +41,39 @@ export default function PolkadotWallet({ onModulesFetched }: { onModulesFetched:
   };
 
   return (
-    <div>
-      <button onClick={() => {}}>Connect</button>
-      {accounts.length > 0 && (
-        <select onChange={(e) => handleAccountSelection(parseInt(e.target.value, 10))}>
-          {accounts.map((account, index) => (
-            <option key={index} value={index}>
-              {account.meta.name} ({account.address})
-            </option>
-          ))}
-        </select>
-      )}
-      {selectedAccount && (
-        <div>
-          <p>Account Name: {selectedAccount.meta.name}</p>
-          <p>Account Address: {selectedAccount.address}</p>
+    <div className="bg-neutral-100 flex items-center justify-center h-[20svh]">
+      {accounts.length === 0 && (
+        <div className="p-8 rounded-md shadow-lg flex flex-col gap-4">
+          <p> Connect Wallet to Fetch Modules </p>
+          <button onClick={handleConnectClick} className="rounded-md px-4 py-2 bg-neutral-800 text-white ">
+            Connect
+          </button>
         </div>
       )}
-      <button onClick={handlePostRequest}>Send POST request</button>
+
+      {accounts.length > 0 && !selectedAccount ? (
+        <>
+          <select onChange={(e) => handleAccountSelection(parseInt(e.target.value, 10))} className="rounded-md">
+            <option value="" key="empty" hidden disabled selected>
+              Choose your account
+            </option>
+            {accounts.map((account, index) => (
+              <option key={index} value={index}>
+                {account.meta.name} ({account.address})
+              </option>
+            ))}
+          </select>
+        </>
+      ) : null}
+      {selectedAccount && (
+        <div className="p-8 rounded-md shadow-lg flex flex-col gap-4">
+          <p>Account Name: {selectedAccount.meta.name}</p>
+          <p>Account Address: {selectedAccount.address}</p>
+          <button onClick={handlePostRequest} className="rounded-md px-4 py-2 bg-neutral-800 text-white ">
+            Fetch Modules
+          </button>
+        </div>
+      )}
     </div>
   );
 }
